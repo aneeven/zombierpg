@@ -5,7 +5,7 @@ public class Zombie {
 	public String name = "";
 	public float decay = 50;
 	public int strength = 50;
-	public float brainPower = 50;
+	public float brainHunger = 50;
 	
 	public String getName() {
 		return name;
@@ -31,12 +31,12 @@ public class Zombie {
 		this.strength = strength;
 	}
 
-	public float getBrainPower() {
-		return brainPower;
+	public float getBrainHunger() {
+		return brainHunger;
 	}
 
-	public void setBrainPower(float brainPower) {
-		this.brainPower = brainPower;
+	public void setBrainHunger(float brainHunger) {
+		this.brainHunger = brainHunger;
 	}
 	
 	// Constructor
