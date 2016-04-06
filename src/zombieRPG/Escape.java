@@ -12,11 +12,11 @@ public Escape(Zombie zombie, Human human) {
 		System.out.println("        F L U C H T       ");
 		System.out.println("---------------------------");
 		if(dice <= 3) {
-			System.out.println("Flucht nicht geglückt.");
+			System.out.println("Flucht nicht geglÃ¼ckt.");
 			System.out.println("Zerfall = 100%");
 			System.out.println("Du bist richtig tot.");
 		} else {
-			System.out.println("Flucht geglückt");
+			System.out.println("Flucht geglÃ¼ckt");
 		}
 		System.out.println("###########################");
 		System.exit(0);

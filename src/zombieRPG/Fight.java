@@ -4,14 +4,14 @@ public class Fight {
 
 	public Fight(Zombie zombie, Human human) {
 		
-		float zombieStärke = (float) zombie.getStrength();
-		float zombieZerfall = zombie.getDecay();
+		float zombieStrength = (float) zombie.getStrength();
+		float zombieDecay = zombie.getDecay();
 		
-		System.out.println(zombieStärke);
-		System.out.println(zombieZerfall);
-		float tatsächlicheStärke = zombieStärke - (-1* zombieZerfall);
+		System.out.println(zombieStrength);
+		System.out.println(zombieDecay);
+		float currentStrength = zombieStrength - (-1* zombieDecay);
 		
-		System.out.println(tatsächlicheStärke);
+		System.out.println(currentStrength);
 		/*
 		System.out.println("###########################");
 		System.out.println("        K A M P F       ");

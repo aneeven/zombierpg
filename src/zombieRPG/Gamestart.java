@@ -8,6 +8,7 @@ public class Gamestart {
 
 public static void main(String[] args) {
 		
+		// Instantiating
 		Zombie zombie = new Zombie("NameDesPlayers");
 
 		String[] nameArray = {
@@ -20,11 +21,11 @@ public static void main(String[] args) {
 		// setting the enemies attributes
 		String name = nameArray[new Random().nextInt(nameArray.length)];
 	
-		int leben = ThreadLocalRandom.current().nextInt(1, 99 + 1);
-		int stärke = ThreadLocalRandom.current().nextInt(1, 99 + 1);
-		int hirnstärke = ThreadLocalRandom.current().nextInt(1, 99 + 1); 
+		int lives = ThreadLocalRandom.current().nextInt(1, 99 + 1);
+		int strength = ThreadLocalRandom.current().nextInt(1, 99 + 1);
+		int brainstrength = ThreadLocalRandom.current().nextInt(1, 99 + 1); 
 				
-		Human human = new Human(name, leben, stärke, hirnstärke);
+		Human human = new Human(name, lives, strength, brainstrength);
 		
 		System.out.println("##################################       |     ##################################");
 		System.out.println(human.getName() + "                           |     " + zombie.getName());
