@@ -97,13 +97,13 @@ public class Human {
 	public String getDifficultyStrength(int difficulty) {
 		switch(difficulty) {
 			case(1):
-				strength = 1 + (int)(Math.random() * 3);
+				strength = 5 + (int)(Math.random() * 10);
 				break;
 			case(2):
-				strength = 3 + (int)(Math.random() * 9);
+				strength = 10 + (int)(Math.random() * 20);
 				break;
 			case(3):
-				strength = 9 + (int)(Math.random() * 20);
+				strength = 20 + (int)(Math.random() * 30);
 				break;
 			default: strength = 5;
 		}
@@ -124,7 +124,7 @@ public class Human {
 		// insert all elements into hashtable
 		douchbag.put( "type", "douchebag");
 		douchbag.put( "name", "Dummkopf");
-		douchbag.put( "lives", "1");
+		douchbag.put( "lives", "10");
 		douchbag.put( "strength", getDifficultyStrength(1));
 		douchbag.put( "brainStrength", "1");
 		if( new Random().nextDouble() <= 0.05 ){
@@ -142,7 +142,7 @@ public class Human {
 		// insert all elements into hashtable
 		craftsman.put( "type", "craftsman");
 		craftsman.put( "name", "Handwerker");
-		craftsman.put( "lives", "3");
+		craftsman.put( "lives", "30");
 		craftsman.put( "strength", getDifficultyStrength(2));
 		craftsman.put( "brainStrength", "2");
 		if( new Random().nextDouble() <= 0.6 ){
@@ -160,7 +160,7 @@ public class Human {
 		// insert all elements into hashtable
 		academic.put( "type", "academic");
 		academic.put( "name", "Akademiker");
-		academic.put( "lives", "5");
+		academic.put( "lives", "40");
 		academic.put( "strength", getDifficultyStrength(2));
 		academic.put( "brainStrength", "10");
 		if( new Random().nextDouble() <= 0.1 ){
@@ -178,7 +178,7 @@ public class Human {
 		// insert all elements into hashtable
 		soldier.put( "type", "soldier");
 		soldier.put( "name", "Soldat");
-		soldier.put( "lives", "5");
+		soldier.put( "lives", "100");
 		soldier.put( "strength", getDifficultyStrength(3));
 		soldier.put( "brainStrength", "10");
 		if( new Random().nextDouble() <= 0.7){

@@ -41,8 +41,6 @@ public class Fight {
 		double currentZombieDecay = zombie.decay;
 		int currentHumanLives = human.lives;
 		
-		getCurrentStatus(zombie, human);
-		
 		// actual fight
 		Fight.gamecircle = true;
 		while (true == Fight.gamecircle) {
@@ -55,6 +53,7 @@ public class Fight {
 					getCurrentStatus(zombie, human);
 				}
 			} else {
+				getCurrentStatus(zombie, human);
 				humansAttackChoice(zombie, human);
 				getCurrentStatus(zombie, human);
 				if(true == Fight.gamecircle){
@@ -204,15 +203,21 @@ public class Fight {
 					break;
 				}
 			case(21):
-				// useItem successful with probability 40%
-				if( new Random().nextDouble() <= 0.4 ){
-					zombie.decay = zombie.getDecay() + (3*(human.strength));
-					System.out.println("Du wurdest von einem Gegenstand getroffen");
-					break;
+				if(human.hasItem) {
+					// useItem successful with probability 40%
+					if( new Random().nextDouble() <= 0.4 ){
+						zombie.decay = zombie.getDecay() + (3*(human.strength));
+						System.out.println("Du wurdest von einem Gegenstand getroffen");
+						break;
+					} else {
+						System.out.println("Gegenstand verfehlt sein Ziel");
+						break;
+					}
 				} else {
-					System.out.println("Gegenstand verfehlt sein Ziel");
+					System.out.println("Dein Gegner ist gestolpert.");
 					break;
 				}
+				
 			case(22):
 				// punch successful with probability 80%
 				if( new Random().nextDouble() <= 0.8 ){
@@ -257,8 +262,12 @@ public class Fight {
 			System.out.println("Du hast den " + human.name + "besiegt.");
 			System.out.println("######################################");
 			System.out.println();
+			zombie.setBrainHunger(zombie.getBrainHunger() - human.brainStrength);
 			Fight.gamecircle = false;
 		} else if(zombie.decay>=100) {
+			/**
+			 * @toDo: add mechanic for hunger increasing/decreasing decay and v.v
+			 */
 			System.out.println();
 			System.out.println("######################################");
 			System.out.println("         N I E D E R L A G E          ");

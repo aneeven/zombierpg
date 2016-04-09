@@ -13,7 +13,7 @@ public class Zombie {
 
 	public String name = "";
 	public double decay = 50;
-	public int strength = 50;
+	public int strength = 5;
 	public double brainHunger = 50.0;
 	
 	public String getName() {
