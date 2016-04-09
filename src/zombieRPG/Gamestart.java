@@ -17,28 +17,6 @@ public class Gamestart {
 			
 			// Instantiating the users' character "zombie"
 			Zombie zombie = new Zombie(userName);
-	
-			// Setting possible enemy (human) names
-			String[] nameArray = {
-				"Peter Pan",
-				"HP Baxxter",
-				"Guenther Jauch",
-				"Heidi",
-				"Fritz Kalkbrenner",
-				"Otto Waalkes",
-				"Jack Black",
-				"Andy",
-				"Flo"
-			};
-			
-			// setting the enemies name with choosing a random name from array
-			String name = nameArray[new Random().nextInt(nameArray.length)];
-			// setting enemies attributes randomly
-			int lives = ThreadLocalRandom.current().nextInt(1, 99 + 1);
-			int strength = ThreadLocalRandom.current().nextInt(1, 99 + 1);
-			int brainstrength = ThreadLocalRandom.current().nextInt(1, 99 + 1); 
-			// Instantiating enemy (human) with the above values
-			Human human = new Human(name, lives, strength, brainstrength, false, 0);
 			
 			Human enemy = new Human();
 			
@@ -60,7 +38,17 @@ public class Gamestart {
 				// switch case for main menu choices
 				switch (choice) {
 		        	case 1: Gamestart.gamestate = "fight";
-		        			Fight fight = new Fight(zombie, human);
+		        			// probability of finding human = 70%
+		        			if( new Random().nextDouble() <= 0.7 ){
+		        				Fight fight = new Fight(zombie, enemy,"zombie");
+		        			} else {
+		        				System.out.println("Niemand zu sehen.");
+		        				System.out.println("Hunger und Zerfall steigen...");
+		        				zombie.setBrainHunger(zombie.getBrainHunger() + 1.0);
+		        				zombie.setDecay(zombie.getDecay() + 2.0);
+		        				Gamestart.gamestate = "mainmenu";
+					    		break;
+		        			}
 		                 	break;
 		        	case 2: Gamestart.gamestate = "state";
 		        			System.out.println("##################################");

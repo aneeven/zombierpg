@@ -1,11 +1,20 @@
 package zombieRPG;
 
+/**
+ * 
+ * Zombie
+ * 
+ * Class stands for users character - the zombie
+ * 
+ * @author f.petruschke
+ *
+ */
 public class Zombie {
 
 	public String name = "";
-	public float decay = 50;
+	public double decay = 50;
 	public int strength = 50;
-	public float brainHunger = 50;
+	public double brainHunger = 50.0;
 	
 	public String getName() {
 		return name;
@@ -15,11 +24,11 @@ public class Zombie {
 		this.name = name;
 	}
 	
-	public float getDecay() {
+	public double getDecay() {
 		return decay;
 	}
 
-	public void setDecay(float decay) {
+	public void setDecay(double decay) {
 		this.decay = decay;
 	}
 
@@ -31,29 +40,22 @@ public class Zombie {
 		this.strength = strength;
 	}
 
-	public float getBrainHunger() {
+	public double getBrainHunger() {
 		return brainHunger;
 	}
 
-	public void setBrainHunger(float brainHunger) {
+	public void setBrainHunger(double brainHunger) {
 		this.brainHunger = brainHunger;
 	}
 	
-	// Constructor
+	/**
+	 * constructor
+	 * 
+	 * Sets the users character name
+	 * 
+	 * @param name
+	 */
 	public Zombie(String name) {
 	    this.name = name;
 	}
-	
-	/*public static void main(String[] args) {
-		
-		Zombie zombie = new Zombie("Hier steht der Charaktername");
-		System.out.println("##################################");
-		System.out.println(zombie.getName());
-		System.out.println("----------------------------------");
-		System.out.println("Zerfall:    " + zombie.getZerfall() + "%");
-		System.out.println("St�rke:     " + zombie.getSt�rke());
-		System.out.println("Hirneffekt: " + zombie.getHirnEffekt() + "%");
-		System.out.println("##################################");
-	}*/
-
 }
