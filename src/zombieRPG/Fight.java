@@ -57,10 +57,12 @@ public class Fight {
 		while (true == Fight.gamecircle) {
 			getCurrentStatus(zombie, human);
 			if("zombie" == beginner) {
-				zombiesAttackChoice(zombie, human);
 				if(true == Fight.gamecircle){
-					TimeUnit.SECONDS.sleep(2);
-					humansAttackChoice(zombie, human);
+					zombiesAttackChoice(zombie, human);
+					if(true == Fight.gamecircle){
+						TimeUnit.SECONDS.sleep(2);
+						humansAttackChoice(zombie, human);
+					}
 				}
 			} else {
 				TimeUnit.SECONDS.sleep(2);
@@ -292,7 +294,6 @@ public class Fight {
 			System.out.println("Du hast den " + human.name + "besiegt.");
 			System.out.println("######################################");
 			System.out.println();
-			Sound victorySound = new Sound("src/audio/victory.wav");
 			zombie.setBrainHunger(zombie.getBrainHunger() - human.brainStrength);
 			zombie.setDecay(zombie.getDecay() - human.brainStrength);
 			zombie.setStrength(zombie.getStrength() + (2/human.getStrength()));
@@ -306,6 +307,7 @@ public class Fight {
 			} else if ("soldier" == human.type) {
 				zombie.killedSoldiers ++;
 			}
+			Sound victorySound = new Sound("src/audio/victory.wav");
 			Fight.gamecircle = false;
 			// going back to main menu if fight is over
 			Start.gamestate = "mainmenu";
@@ -322,19 +324,28 @@ public class Fight {
 			System.out.println();
 			System.out.println("           G A M E  O V E R           ");
 			System.out.println("Du hast " + zombie.humansKilled + " Menschen getötet.");
+			System.out.println();
+			System.out.println("      [1] zurück zum Hauptmenü        ");
 			System.out.println("######################################");
 			System.out.println();
-			Start.gamestate = "startmenu";
+			Scanner input = new Scanner(System.in);
 			Fight.gamecircle = false;
+			int choice = input.nextInt();
+			switch(choice){
+			case(1):Start.gamestate = "startmenu";
+					break;
+			default:Start.gamestate = "startmenu";
+					break;
+			}
 		} else {
 			System.out.println("##################################       |     ##################################");
 			System.out.println(human.getName() +"                         |     " + zombie.getName());
 			System.out.println("----------------------------------       |     ----------------------------------");
-			System.out.println("Leben:      " + human.getLives() +                  "                            |     Zerfall:    " + zombie.getDecay() + "%");
+			System.out.println("Leben:      " + human.getLives() +                 "                            |     Zerfall:    " + zombie.getDecay() + "%");
 			System.out.println("Stärke:     " + human.getStrength() + "              		 |     Stärke:     " + zombie.getStrength());
 			System.out.println("Hirnstärke: " + human.getBrainStrength() + "         		         |     Gehirn-Hunger: " + zombie.getBrainHunger() + "%");
 			System.out.println("##################################       |     ##################################");
-			System.out.println("+ " + human.itemStrength + "Stärke durch " + human.itemName + "  | + " + 0 + "Stärke durch Blutrausch"  );
+			System.out.println("+ " + human.itemStrength + " Stärke durch " + human.itemName + "          | + " + 0 + "Stärke durch Blutrausch"  );
 			System.out.println("----------------------------------       |     ----------------------------------");
 			System.out.println();
 		}	
