@@ -18,6 +18,7 @@ public class Gamestart {
 			
 			// showing provisionally Main Menu
 			while(Start.gamestate == "mainmenu") {
+				System.out.println(Start.gamestate);
 				System.out.println();
 				System.out.println("##############################");
 				System.out.println("     H A U P T M E N Ü        ");

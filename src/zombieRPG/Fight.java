@@ -63,8 +63,6 @@ public class Fight {
 				}
 			}
 		}
-		// going back to main menu if fight is over
-		Start.gamestate = "mainmenu";
 	}
 	
 	/**
@@ -277,6 +275,8 @@ public class Fight {
 				zombie.killedSoldiers ++;
 			}
 			Fight.gamecircle = false;
+			// going back to main menu if fight is over
+			Start.gamestate = "mainmenu";
 		} else if(zombie.decay>=100) {
 			/**
 			 * @toDo: add mechanic for hunger increasing/decreasing decay and v.v
@@ -291,8 +291,8 @@ public class Fight {
 			System.out.println("Du hast " + zombie.humansKilled + " Menschen getötet.");
 			System.out.println("######################################");
 			System.out.println();
-			Fight.gamecircle = false;
 			Start.gamestate = "startmenu";
+			Fight.gamecircle = false;
 		} else {
 			System.out.println("##################################       |     ##################################");
 			System.out.println(human.getName() +"                         |     " + zombie.getName());
