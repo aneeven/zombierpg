@@ -29,7 +29,9 @@ public class Fight {
 	 * @param beginner	Either "zombie" or different.
 	 * 					Controls whether zombie or enemy starts attack first
 	 */
-	public Fight(Zombie zombie, Human human, String beginner) {
+	public Fight(Zombie zombie, String beginner) {
+		
+		Human human = new Human();
 		
 		/*
 		 * @toDo : create a nextRoundBonus mechanism
@@ -44,8 +46,8 @@ public class Fight {
 		// actual fight
 		Fight.gamecircle = true;
 		while (true == Fight.gamecircle) {
+			getCurrentStatus(zombie, human);
 			if("zombie" == beginner) {
-				getCurrentStatus(zombie, human);
 				zombiesAttackChoice(zombie, human);
 				getCurrentStatus(zombie, human);
 				if(true == Fight.gamecircle){
@@ -53,7 +55,6 @@ public class Fight {
 					getCurrentStatus(zombie, human);
 				}
 			} else {
-				getCurrentStatus(zombie, human);
 				humansAttackChoice(zombie, human);
 				getCurrentStatus(zombie, human);
 				if(true == Fight.gamecircle){
@@ -63,7 +64,7 @@ public class Fight {
 			}
 		}
 		// going back to main menu if fight is over
-		Gamestart.gamestate = "mainmenu";
+		Start.gamestate = "mainmenu";
 	}
 	
 	/**
@@ -263,6 +264,18 @@ public class Fight {
 			System.out.println("######################################");
 			System.out.println();
 			zombie.setBrainHunger(zombie.getBrainHunger() - human.brainStrength);
+			zombie.setDecay(zombie.getDecay() - human.brainStrength);
+			zombie.setStrength(zombie.getStrength() + (2/human.getStrength()));
+			zombie.humansKilled ++;
+			if("douchebag" == human.type) {
+				zombie.killedDouchbags ++;
+			} else if ("craftsman" == human.type) {
+				zombie.killedCraftsmen ++;
+			} else if ("academic" == human.type) {
+				zombie.killedAcademics ++;
+			} else if ("soldier" == human.type) {
+				zombie.killedSoldiers ++;
+			}
 			Fight.gamecircle = false;
 		} else if(zombie.decay>=100) {
 			/**
@@ -275,10 +288,11 @@ public class Fight {
 			System.out.println("Du wurdest besiegt.");
 			System.out.println();
 			System.out.println("           G A M E  O V E R           ");
+			System.out.println("Du hast " + zombie.humansKilled + " Menschen getötet.");
 			System.out.println("######################################");
 			System.out.println();
 			Fight.gamecircle = false;
-			System.exit(0);
+			Start.gamestate = "startmenu";
 		} else {
 			System.out.println("##################################       |     ##################################");
 			System.out.println(human.getName() +"                         |     " + zombie.getName());

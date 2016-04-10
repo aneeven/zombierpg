@@ -15,6 +15,11 @@ public class Zombie {
 	public double decay = 50;
 	public int strength = 5;
 	public double brainHunger = 50.0;
+	public int humansKilled;
+	public int killedDouchbags;
+	public int killedCraftsmen;
+	public int killedAcademics;
+	public int killedSoldiers;
 	
 	public String getName() {
 		return name;
@@ -48,6 +53,14 @@ public class Zombie {
 		this.brainHunger = brainHunger;
 	}
 	
+	public int getHumansKilled() {
+		return humansKilled;
+	}
+
+	public void setHumansKilled(int humansKilled) {
+		this.humansKilled = humansKilled;
+	}
+	
 	/**
 	 * constructor
 	 * 
@@ -56,6 +69,7 @@ public class Zombie {
 	 * @param name
 	 */
 	public Zombie(String name) {
+		this.humansKilled = 0;		
 	    this.name = name;
 	}
 }

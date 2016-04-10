@@ -35,7 +35,7 @@ public class Escape {
 			System.out.println(human.getName() + " greift Dich an...");
 			System.out.println("###########################");
 			System.out.println();
-			Fight fight = new Fight(zombie, human,"human");
+			Fight fight = new Fight(zombie, "human");
 		} else {
 			System.out.println();
 			System.out.println("###########################");
@@ -44,13 +44,12 @@ public class Escape {
 			System.out.println("Flucht geglückt");
 			System.out.println("###########################");
 			System.out.println();
-			
-			/**
-			 * @toDo find a safe way to completely unset the human!
-			 */
 			human = null;
+			zombie.setBrainHunger(zombie.brainHunger ++);
+			zombie.setDecay(zombie.decay ++);
+			zombie.setStrength(zombie.getStrength() + (2/human.getStrength()));
 			Fight.gamecircle = false;
-			Gamestart.gamestate = "mainmenu";
+			Start.gamestate = "mainmenu";
 		}
 	}
 }
