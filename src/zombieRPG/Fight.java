@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -58,12 +59,15 @@ public class Fight {
 			if("zombie" == beginner) {
 				zombiesAttackChoice(zombie, human);
 				if(true == Fight.gamecircle){
+					TimeUnit.SECONDS.sleep(2);
 					humansAttackChoice(zombie, human);
 				}
 			} else {
+				TimeUnit.SECONDS.sleep(2);
 				humansAttackChoice(zombie, human);
 				if(true == Fight.gamecircle){
 					zombiesAttackChoice(zombie, human);
+					
 				}
 			}
 		}
@@ -174,6 +178,7 @@ public class Fight {
 				// scratch successful with probability 90%
 				if( new Random().nextDouble() <= 0.9 ){
 					human.setLives(human.getLives() - (1*zombie.strength));
+					Sound zombieSound = new Sound("src/audio/zombieAttack.wav");
 					System.out.println("Kratzen erfolgreich");
 					break;
 				} else {
@@ -187,6 +192,7 @@ public class Fight {
 					human.setHasItem(false);
 					human.setItemName("nichts");
 					human.setItemStrength(0);
+					Sound zombieSound = new Sound("src/audio/zombieAttack.wav");
 					System.out.println("Entwaffnung erfolgreich");
 					break;
 				} else {
@@ -199,6 +205,7 @@ public class Fight {
 				if( new Random().nextDouble() <= 0.7 ){
 					human.setLives(human.getLives() - (2*zombie.strength));
 					zombie.setBrainHunger(zombie.getBrainHunger() - (0.25 * human.getBrainStrength()));
+					Sound zombieSound = new Sound("src/audio/zombieAttack.wav");
 					System.out.println("Beißen erfolgreich");
 					break;
 				} else {
@@ -210,6 +217,7 @@ public class Fight {
 				// pounce on successful with probability 40%
 				if( new Random().nextDouble() <= 0.4 ){
 					zombie.setStrength(zombie.getStrength() + (human.strength));
+					Sound zombieSound = new Sound("src/audio/zombieAttack.wav");
 					System.out.println("Anspringen geglückt");
 					break;
 				} else {
@@ -238,6 +246,7 @@ public class Fight {
 				// punch successful with probability 80%
 				if( new Random().nextDouble() <= 0.8 ){
 					zombie.decay = zombie.getDecay() + (human.strength);
+					Sound punchSound = new Sound("src/audio/punch.wav");
 					System.out.println("Du wurdest geschlagen");
 					break;
 				} else {
@@ -248,6 +257,7 @@ public class Fight {
 				// kick successful with probability 60% 
 				if( new Random().nextDouble() <= 0.6 ){
 					zombie.decay = zombie.getDecay() + (2*(human.strength));
+					Sound punchSound = new Sound("src/audio/punch.wav");
 					System.out.println("Du wurdest getreten");
 					break;
 				} else {
@@ -268,8 +278,12 @@ public class Fight {
 	 * 
 	 * @param zombie	zombie object
 	 * @param human		human object
+	 * @throws InterruptedException 
+	 * @throws LineUnavailableException 
+	 * @throws UnsupportedAudioFileException 
+	 * @throws IOException 
 	 */
-	public void getCurrentStatus(Zombie zombie, Human human) {
+	public void getCurrentStatus(Zombie zombie, Human human) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		if(human.lives<=0) {
 			System.out.println();
 			System.out.println("######################################");
@@ -278,6 +292,7 @@ public class Fight {
 			System.out.println("Du hast den " + human.name + "besiegt.");
 			System.out.println("######################################");
 			System.out.println();
+			Sound victorySound = new Sound("src/audio/victory.wav");
 			zombie.setBrainHunger(zombie.getBrainHunger() - human.brainStrength);
 			zombie.setDecay(zombie.getDecay() - human.brainStrength);
 			zombie.setStrength(zombie.getStrength() + (2/human.getStrength()));
@@ -298,6 +313,7 @@ public class Fight {
 			/**
 			 * @toDo: add mechanic for hunger increasing/decreasing decay and v.v
 			 */
+			Sound defeatSound = new Sound("src/audio/defeat.wav");
 			System.out.println();
 			System.out.println("######################################");
 			System.out.println("         N I E D E R L A G E          ");
