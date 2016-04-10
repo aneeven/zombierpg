@@ -1,12 +1,41 @@
 package zombieRPG;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 public class Gamestart {
+	
+	public Sound backgroundMusic;
+	
+	/**
+	 * constructor
+	 * 
+	 * Constructor sets the background music object
+	 * 
+	 * @param backgroundMusic Sound object
+	 */
+	public Gamestart(Sound backgroundMusic) {
+		this.backgroundMusic = backgroundMusic;
+	}
 		
-	public void start() {
+	/**
+	 * start
+	 * 
+	 * Method for starting the actual game.
+	 * It gives the user action options to choose from after
+	 * instantiating the users' zombie object
+	 * 
+	 * @throws IOException
+	 * @throws UnsupportedAudioFileException
+	 * @throws LineUnavailableException
+	 * @throws InterruptedException
+	 */
+	public void start() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 			
 			// Getting the users character name
 			System.out.println("Gib Deinen Spielernamen ein: ");
@@ -16,9 +45,14 @@ public class Gamestart {
 			// Instantiating the users' character "zombie"
 			Zombie zombie = new Zombie(userName);
 			
+			// stop playing background music from main menu
+			backgroundMusic.stopClip();
+			
+			// start new background title
+			Sound backgroundTheme = new Sound("src/audio/nature.wav");
+			
 			// showing provisionally Main Menu
 			while(Start.gamestate == "mainmenu") {
-				System.out.println(Start.gamestate);
 				System.out.println();
 				System.out.println("##############################");
 				System.out.println("     H A U P T M E N Ü        ");
@@ -37,12 +71,16 @@ public class Gamestart {
 		        	case 1: Start.gamestate = "fight";
 		        			// probability of finding human = 70%
 		        			if( new Random().nextDouble() <= 0.7 ){
+		        				Sound foundHuman = new Sound("src/audio/foundHuman.wav");
 		        				Fight fight = new Fight(zombie, "zombie");
 		        			} else {
+		        				Sound noHuman = new Sound("src/audio/noHuman.wav");
+		        				noHuman.playClip();
 		        				System.out.println("Niemand zu sehen.");
 		        				System.out.println("Hunger und Zerfall steigen...");
 		        				zombie.setBrainHunger(zombie.getBrainHunger() + 1.0);
 		        				zombie.setDecay(zombie.getDecay() + 2.0);
+		        				noHuman.stopClip();
 		        				Start.gamestate = "mainmenu";
 					    		break;
 		        			}

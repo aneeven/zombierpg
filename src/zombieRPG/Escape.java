@@ -1,6 +1,10 @@
 package zombieRPG;
 
+import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * class Escape
@@ -21,8 +25,12 @@ public class Escape {
 	 * 
 	 * @param zombie	Zombie object
 	 * @param human		Human object
+	 * @throws InterruptedException 
+	 * @throws LineUnavailableException 
+	 * @throws UnsupportedAudioFileException 
+	 * @throws IOException 
 	 */
-	public Escape(Zombie zombie, Human human) {
+	public Escape(Zombie zombie, Human human) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		
 		// throw new dice for randomly choosing the according event
 		int dice = ThreadLocalRandom.current().nextInt(1, 5 + 1);
@@ -44,7 +52,6 @@ public class Escape {
 			System.out.println("Flucht geglückt");
 			System.out.println("###########################");
 			System.out.println();
-			human = null;
 			zombie.setBrainHunger(zombie.brainHunger ++);
 			zombie.setDecay(zombie.decay ++);
 			zombie.setStrength(zombie.getStrength() + (2/human.getStrength()));

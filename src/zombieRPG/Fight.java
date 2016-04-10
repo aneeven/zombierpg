@@ -1,8 +1,12 @@
 package zombieRPG;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * class Fight
@@ -28,8 +32,12 @@ public class Fight {
 	 * @param human		Human object
 	 * @param beginner	Either "zombie" or different.
 	 * 					Controls whether zombie or enemy starts attack first
+	 * @throws InterruptedException 
+	 * @throws LineUnavailableException 
+	 * @throws UnsupportedAudioFileException 
+	 * @throws IOException 
 	 */
-	public Fight(Zombie zombie, String beginner) {
+	public Fight(Zombie zombie, String beginner) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		
 		Human human = new Human();
 		
@@ -49,17 +57,13 @@ public class Fight {
 			getCurrentStatus(zombie, human);
 			if("zombie" == beginner) {
 				zombiesAttackChoice(zombie, human);
-				getCurrentStatus(zombie, human);
 				if(true == Fight.gamecircle){
 					humansAttackChoice(zombie, human);
-					getCurrentStatus(zombie, human);
 				}
 			} else {
 				humansAttackChoice(zombie, human);
-				getCurrentStatus(zombie, human);
 				if(true == Fight.gamecircle){
 					zombiesAttackChoice(zombie, human);
-					getCurrentStatus(zombie, human);
 				}
 			}
 		}
@@ -73,8 +77,12 @@ public class Fight {
 	 * 
 	 * @param zombie	Zombie Object
 	 * @param human		Human Object
+	 * @throws InterruptedException 
+	 * @throws LineUnavailableException 
+	 * @throws UnsupportedAudioFileException 
+	 * @throws IOException 
 	 */
-	public void zombiesAttackChoice(Zombie zombie, Human human) {
+	public void zombiesAttackChoice(Zombie zombie, Human human) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		// showing provisionally Main Menu
 		System.out.println("Du greifst an...");
 		System.out.println("[1] Kratzen       ");
@@ -118,8 +126,12 @@ public class Fight {
 	 * 
 	 * @param zombie	Zombie Object
 	 * @param human		Human Object
+	 * @throws InterruptedException 
+	 * @throws LineUnavailableException 
+	 * @throws UnsupportedAudioFileException 
+	 * @throws IOException 
 	 */
-	public void humansAttackChoice(Zombie zombie, Human human) {
+	public void humansAttackChoice(Zombie zombie, Human human) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		// humans' attack
 		int dice = ThreadLocalRandom.current().nextInt(1, 3 + 1);
 		switch(dice){
@@ -151,8 +163,12 @@ public class Fight {
 	 * 14 pounceOn
 	 * 
 	 * @param attackType
+	 * @throws InterruptedException 
+	 * @throws LineUnavailableException 
+	 * @throws UnsupportedAudioFileException 
+	 * @throws IOException 
 	 */
-	public void attack(Human human, Zombie zombie, int attackType) {
+	public void attack(Human human, Zombie zombie, int attackType) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		switch(attackType) {
 			case(11):
 				// scratch successful with probability 90%
@@ -206,6 +222,7 @@ public class Fight {
 					// useItem successful with probability 40%
 					if( new Random().nextDouble() <= 0.4 ){
 						zombie.decay = zombie.getDecay() + (3*(human.strength));
+						Sound punchSound = new Sound("src/audio/punch.wav");
 						System.out.println("Du wurdest von einem Gegenstand getroffen");
 						break;
 					} else {
