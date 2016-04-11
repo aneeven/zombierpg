@@ -18,6 +18,7 @@ public class Interface {
 	JPanel panelStatus = new JPanel();
 	CardLayout cl = new CardLayout();
 	private JTextField inputName;
+	Zombie zombie;
 
 	public Interface() {
 		frame.getContentPane().add(panelCont);
@@ -103,10 +104,11 @@ public class Interface {
 				cl.show(panelCont, "game");
 				
 				// Set userName to input content
-//				zombie.setName() = inputName.getText();
+				// zombie.setName() = inputName.getText();
+				zombie = new Zombie(inputName.getText());
 				Gamestart Game = new Gamestart();
 				try {
-					Game.start();
+					Game.start(zombie);
 				} catch (IOException | UnsupportedAudioFileException
 						| LineUnavailableException | InterruptedException e) {
 					e.printStackTrace();
@@ -125,7 +127,7 @@ public class Interface {
 		btnStats.setBounds(238, 261, 314, 61);
 		panelGame.add(btnStats);
 		
-		JLabel lblNewLabel = new JLabel();
+		final JLabel lblNewLabel = new JLabel();
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(238, 171, 61, 16);
 		
@@ -133,7 +135,8 @@ public class Interface {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cl.show(panelCont, "status");
-//				lblNewLabel.setText(Zombie.name);
+				lblNewLabel.setText(zombie.getName());
+				lblNewLabel.setText(String.valueOf(zombie.getBrainHunger()));
 			}
 		});
 		

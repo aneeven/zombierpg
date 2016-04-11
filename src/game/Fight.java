@@ -310,7 +310,7 @@ public class Fight {
 			Sound victorySound = new Sound("src/audio/victory.wav");
 			Fight.gamecircle = false;
 			// going back to main menu if fight is over
-			Start.gamestate = "mainmenu";
+			//Start.gamestate = "mainmenu";
 		} else if(zombie.decay>=100) {
 			/**
 			 * @toDo: add mechanic for hunger increasing/decreasing decay and v.v
@@ -331,12 +331,12 @@ public class Fight {
 			Scanner input = new Scanner(System.in);
 			Fight.gamecircle = false;
 			int choice = input.nextInt();
-			switch(choice){
+			/*switch(choice){
 			case(1):Start.gamestate = "startmenu";
 					break;
 			default:Start.gamestate = "startmenu";
 					break;
-			}
+			}*/
 		} else {
 			System.out.println("##################################       |     ##################################");
 			System.out.println(human.getName() +"                         |     " + zombie.getName());

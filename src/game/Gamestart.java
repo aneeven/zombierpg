@@ -46,14 +46,15 @@ public class Gamestart {
 	 * It gives the user action options to choose from after
 	 * instantiating the users' zombie object
 	 * 
+	 * @param zombie
 	 * @throws IOException
 	 * @throws UnsupportedAudioFileException
 	 * @throws LineUnavailableException
 	 * @throws InterruptedException
 	 */
-	public void start() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
+	public void start(Zombie zombie) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		
-			Zombie zombie = new Zombie();
+			//Zombie zombie = new Zombie("hains");
 			gamestate = "mainmenu";
 			System.out.println(zombie.getName() + "   " + gamestate);
 			
