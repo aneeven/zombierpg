@@ -71,7 +71,6 @@ public class Sound {
 		        		
 		        		setAudiofile(pathToSoundfile);
 		        		playClip();
-						//Sound music = new Sound("src/audio/title.wav");
 					} catch (IOException e) {
 						e.printStackTrace();
 					} catch (UnsupportedAudioFileException e) {
