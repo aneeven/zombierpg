@@ -1,5 +1,6 @@
 package game;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ public class Interface {
 	JPanel panelGame = new JPanel();
 	JPanel panelCredits = new JPanel();
 	CardLayout cl = new CardLayout();
+	private JTextField inputName;
 
 	public Interface() {
 		frame.getContentPane().add(panelCont);
@@ -75,11 +77,11 @@ public class Interface {
 			}
 		});
 		
-		JLabel title = new JLabel("Zombie RPG");
-		sl_panelStart.putConstraint(SpringLayout.SOUTH, title, -318, SpringLayout.SOUTH, panelStart);
-		sl_panelStart.putConstraint(SpringLayout.NORTH, btnCredits, 126, SpringLayout.SOUTH, title);
+		JLabel title = new JLabel ("Zombie RPG");
 		title.setForeground(new Color(204, 0, 0));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
+		sl_panelStart.putConstraint(SpringLayout.SOUTH, title, -318, SpringLayout.SOUTH, panelStart);
+		sl_panelStart.putConstraint(SpringLayout.NORTH, btnCredits, 126, SpringLayout.SOUTH, title);
 		sl_panelStart.putConstraint(SpringLayout.WEST, title, 184, SpringLayout.WEST, panelStart);
 		title.setFont(new Font("Arial", Font.BOLD, 70));
 		panelStart.add(title);
@@ -91,15 +93,29 @@ public class Interface {
 		panelName.setLayout(sl_panelName);
 		panelName.setBackground(new Color(37, 41, 50));
 						
-		JButton btnThird = new JButton("Go!");
-		sl_panelName.putConstraint(SpringLayout.NORTH, btnThird, 145, SpringLayout.NORTH, panelName);
-		sl_panelName.putConstraint(SpringLayout.EAST, btnThird, -254, SpringLayout.EAST, panelName);
-		panelName.add(btnThird);
+		JButton btnStartGame = new JButton("Go!");
+		sl_panelName.putConstraint(SpringLayout.SOUTH, btnStartGame, -48, SpringLayout.SOUTH, panelName);
+		sl_panelName.putConstraint(SpringLayout.NORTH, btnStartGame, 344, SpringLayout.NORTH, panelName);
+		sl_panelName.putConstraint(SpringLayout.WEST, btnStartGame, 238, SpringLayout.WEST, panelName);
+		sl_panelName.putConstraint(SpringLayout.EAST, btnStartGame, -248, SpringLayout.EAST, panelName);
+		panelName.add(btnStartGame);
+		
+		inputName = new JTextField();
+		inputName.setHorizontalAlignment(SwingConstants.CENTER);
+		inputName.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		sl_panelName.putConstraint(SpringLayout.WEST, inputName, 0, SpringLayout.WEST, btnStartGame);
+		sl_panelName.putConstraint(SpringLayout.NORTH, inputName, 180, SpringLayout.NORTH, panelName);
+		sl_panelName.putConstraint(SpringLayout.SOUTH, inputName, -212, SpringLayout.SOUTH, panelName);
+		sl_panelName.putConstraint(SpringLayout.WEST, inputName, 238, SpringLayout.WEST, panelName);
+		sl_panelName.putConstraint(SpringLayout.EAST, inputName, -248, SpringLayout.EAST, panelName);
+		panelName.add(inputName);
+		inputName.setColumns(10);
 						
-		btnThird.addActionListener(new ActionListener() {
+		btnStartGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cl.show(panelCont, "game");
+				
 			}
 		});
 		
@@ -129,28 +145,23 @@ public class Interface {
 		panelCredits.setLayout(sl_panelCredits);
 		panelCredits.setBackground(new Color(37, 41, 50));
 		
-		JButton btnBackToMenue = new JButton("Back to main menu");
-		sl_panelCredits.putConstraint(SpringLayout.SOUTH, btnBackToMenue, -48, SpringLayout.SOUTH, panelCredits);
-		sl_panelCredits.putConstraint(SpringLayout.NORTH, btnBackToMenue, 344, SpringLayout.NORTH, panelCredits);
-		sl_panelCredits.putConstraint(SpringLayout.WEST, btnBackToMenue, 238, SpringLayout.WEST, panelCredits);
-		sl_panelCredits.putConstraint(SpringLayout.EAST, btnBackToMenue, -248, SpringLayout.EAST, panelCredits);
-		panelCredits.add(btnBackToMenue);
+		JButton btnBackToMenu = new JButton("Back to main menu");
+		sl_panelCredits.putConstraint(SpringLayout.SOUTH, btnBackToMenu, -48, SpringLayout.SOUTH, panelCredits);
+		sl_panelCredits.putConstraint(SpringLayout.NORTH, btnBackToMenu, 344, SpringLayout.NORTH, panelCredits);
+		sl_panelCredits.putConstraint(SpringLayout.WEST, btnBackToMenu, 238, SpringLayout.WEST, panelCredits);
+		sl_panelCredits.putConstraint(SpringLayout.EAST, btnBackToMenu, -248, SpringLayout.EAST, panelCredits);
+		panelCredits.add(btnBackToMenu);
 		
-		btnBackToMenue.addActionListener(new ActionListener() {
+		btnBackToMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				cl.show(panelCont, "start");
-			}
-		});
 				
-	}
-
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				new Interface();
+				String playerName = inputName.getText();
+				Zombie zombie = new Zombie(playerName);
+				System.out.println(zombie.getName());
+				
 			}
-		});
+		});			
 	}
 }
