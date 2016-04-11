@@ -15,6 +15,7 @@ public class Interface {
 	JPanel panelName = new JPanel();
 	JPanel panelGame = new JPanel();
 	JPanel panelCredits = new JPanel();
+	JPanel panelStatus = new JPanel();
 	CardLayout cl = new CardLayout();
 	private JTextField inputName;
 
@@ -30,11 +31,12 @@ public class Interface {
 		panelCont.add(panelName, "name");
 		panelCont.add(panelGame, "game");
 		panelCont.add(panelCredits, "credits");
+		panelCont.add(panelStatus, "status");
 		cl.show(panelCont, "start");
 		panelStart.setBackground(new Color(37, 41, 50));
 		panelStart.setLayout(null);
 		
-		JButton btnStart = new JButton("Start Game");
+		JButton btnStart = new JButton("Spiel starten");
 		btnStart.setBounds(238, 180, 314, 61);
 		panelStart.add(btnStart);
 		
@@ -56,7 +58,7 @@ public class Interface {
 			}
 		});
 		
-		JButton btnExit = new JButton("Exit");
+		JButton btnExit = new JButton("Beenden");
 		btnExit.setBounds(238, 344, 314, 61);
 		panelStart.add(btnExit);
 		
@@ -67,7 +69,7 @@ public class Interface {
 			}
 		});
 		
-		JLabel title = new JLabel("Zombie RPG");
+		JLabel title = new JLabel ("Zombie RPG");
 		title.setBounds(184, 53, 420, 82);
 		title.setForeground(new Color(204, 0, 0));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -77,7 +79,7 @@ public class Interface {
 		panelName.setBackground(new Color(37, 41, 50));
 		panelName.setLayout(null);
 						
-		JButton btnStartGame = new JButton("Go!");
+		JButton btnStartGame = new JButton("Spiel starten");
 		btnStartGame.setBounds(238, 261, 314, 61);
 		panelName.add(btnStartGame);
 		
@@ -101,10 +103,10 @@ public class Interface {
 				cl.show(panelCont, "game");
 				
 				// Set userName to input content
-				String userName = inputName.getText();
+//				zombie.setName() = inputName.getText();
 				Gamestart Game = new Gamestart();
 				try {
-					Game.start(userName);
+					Game.start();
 				} catch (IOException | UnsupportedAudioFileException
 						| LineUnavailableException | InterruptedException e) {
 					e.printStackTrace();
@@ -115,15 +117,27 @@ public class Interface {
 		panelGame.setBackground(new Color(37, 41, 50));
 		panelGame.setLayout(null);
 		
-		JButton btnSearch = new JButton("Search humans");
+		JButton btnSearch = new JButton("Suche Menschen");
 		btnSearch.setBounds(238, 180, 314, 61);
 		panelGame.add(btnSearch);
 		
-		JButton btnStats = new JButton("View Stats");
+		JButton btnStats = new JButton("Status");
 		btnStats.setBounds(238, 261, 314, 61);
 		panelGame.add(btnStats);
 		
-		JButton btnExit2 = new JButton("Quit Game");
+		JLabel lblNewLabel = new JLabel();
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(238, 171, 61, 16);
+		
+		btnStats.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				cl.show(panelCont, "status");
+//				lblNewLabel.setText(Zombie.name);
+			}
+		});
+		
+		JButton btnExit2 = new JButton("Beenden");
 		btnExit2.setBounds(238, 344, 314, 61);
 		panelGame.add(btnExit2);
 		
@@ -134,7 +148,7 @@ public class Interface {
 			}
 		});
 		
-		JLabel title3 = new JLabel("Zombie RPG");
+		JLabel title3 = new JLabel ("Zombie RPG");
 		title3.setBounds(184, 53, 420, 82);
 		title3.setForeground(new Color(204, 0, 0));
 		title3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -150,22 +164,33 @@ public class Interface {
 		panelCredits.setBackground(new Color(37, 41, 50));
 		panelCredits.setLayout(null);
 		
-		JButton btnBackToMenu = new JButton("Back to main menu");
+		JButton btnBackToMenu = new JButton("Zurueck zum Menue");
 		btnBackToMenu.setBounds(238, 344, 314, 61);
 		panelCredits.add(btnBackToMenu);
 		
-		JLabel title4 = new JLabel("Zombie RPG");
+		JLabel title4 = new JLabel ("Zombie RPG");
 		title4.setBounds(184, 53, 420, 82);
 		title4.setForeground(new Color(204, 0, 0));
 		title4.setHorizontalAlignment(SwingConstants.CENTER);
 		title4.setFont(new Font("Arial", Font.BOLD, 70));
 		panelCredits.add(title4);
 		
-		btnBackToMenu.addActionListener(new ActionListener() {
+		
+		panelStatus.setBackground(new Color(37, 41, 50));
+		panelStatus.setLayout(null);
+		
+		JButton btnBackToGame = new JButton("Zurueck zum Spiel");
+		btnBackToGame.setBounds(238, 344, 314, 61);
+		panelStatus.add(btnBackToGame);
+		
+		
+		panelStatus.add(lblNewLabel);
+		
+		btnBackToGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				cl.show(panelCont, "start");
+				cl.show(panelCont, "game");
 			}
-		});			
+		});
 	}
 }

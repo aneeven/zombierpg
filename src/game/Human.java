@@ -21,6 +21,7 @@ public class Human {
 	public Boolean hasItem;
 	public int itemStrength;
 	public String itemName;
+	public String pathToImage;
 	
 	public String getType() {
 		return type;

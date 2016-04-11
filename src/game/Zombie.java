@@ -20,6 +20,7 @@ public class Zombie {
 	public int killedCraftsmen;
 	public int killedAcademics;
 	public int killedSoldiers;
+	public String pathToImage;
 	
 	public String getName() {
 		return name;

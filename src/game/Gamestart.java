@@ -12,7 +12,6 @@ public class Gamestart {
 	
 	public static String gamestate="startmenu";
 	public static boolean music=true;
-	public static String userName = "";
 	public Sound backgroundMusic;
 	
 	
@@ -52,11 +51,11 @@ public class Gamestart {
 	 * @throws LineUnavailableException
 	 * @throws InterruptedException
 	 */
-	public void start(String userName) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
+	public void start() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		
-			Zombie zombie = new Zombie(userName);
+			Zombie zombie = new Zombie();
 			gamestate = "mainmenu";
-			System.out.println(userName + "   " + gamestate);
+			System.out.println(zombie.getName() + "   " + gamestate);
 			
 			// stop playing background music from main menu
 //			backgroundMusic.stopClip();
