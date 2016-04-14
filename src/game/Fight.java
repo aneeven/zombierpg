@@ -20,7 +20,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Fight {
 	
-	public static boolean gamecircle;
+	public static boolean gameloop;
 
 	/**
 	 * Fight
@@ -53,13 +53,13 @@ public class Fight {
 		int currentHumanLives = human.lives;
 		
 		// actual fight
-		Fight.gamecircle = true;
-		while (true == Fight.gamecircle) {
+		Fight.gameloop = true;
+		while (true == Fight.gameloop) {
 			getCurrentStatus(zombie, human);
 			if("zombie" == beginner) {
-				if(true == Fight.gamecircle){
+				if(true == Fight.gameloop){
 					zombiesAttackChoice(zombie, human);
-					if(true == Fight.gamecircle){
+					if(true == Fight.gameloop){
 						TimeUnit.SECONDS.sleep(2);
 						humansAttackChoice(zombie, human);
 					}
@@ -67,7 +67,7 @@ public class Fight {
 			} else {
 				TimeUnit.SECONDS.sleep(2);
 				humansAttackChoice(zombie, human);
-				if(true == Fight.gamecircle){
+				if(true == Fight.gameloop){
 					zombiesAttackChoice(zombie, human);
 					
 				}
@@ -116,7 +116,7 @@ public class Fight {
 				zombie.setDecay(zombie.getDecay() + 5.0);
 			}
 		} else if (9 == choice) {
-			Escape escpae = new Escape(zombie, human);
+			Escape escape = new Escape(zombie, human);
 		} else {
 			System.out.println("Netter Versuch... G A M E  O V E R. Du bist verrottet.");
 			System.exit(0);
@@ -329,7 +329,7 @@ public class Fight {
 			System.out.println("######################################");
 			System.out.println();
 			Scanner input = new Scanner(System.in);
-			Fight.gamecircle = false;
+			Fight.gameloop = false;
 			int choice = input.nextInt();
 			/*switch(choice){
 			case(1):Start.gamestate = "startmenu";

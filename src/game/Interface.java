@@ -14,6 +14,7 @@ public class Interface {
 	JPanel panelStart = new JPanel();
 	JPanel panelName = new JPanel();
 	JPanel panelGame = new JPanel();
+	JPanel panelFight = new JPanel();
 	JPanel panelCredits = new JPanel();
 	JPanel panelStatus = new JPanel();
 	CardLayout cl = new CardLayout();
@@ -31,9 +32,13 @@ public class Interface {
 		panelCont.add(panelStart, "start");
 		panelCont.add(panelName, "name");
 		panelCont.add(panelGame, "game");
+		panelCont.add(panelFight, "fight");
 		panelCont.add(panelCredits, "credits");
 		panelCont.add(panelStatus, "status");
 		cl.show(panelCont, "start");
+		
+		
+		
 		panelStart.setBackground(new Color(37, 41, 50));
 		panelStart.setLayout(null);
 		
@@ -91,7 +96,7 @@ public class Interface {
 		panelName.add(inputName);
 		inputName.setColumns(10);
 		
-		JLabel title2 = new JLabel("Zombie RPG");
+		JLabel title2 = new JLabel ("Zombie RPG");
 		title2.setBounds(184, 53, 420, 82);
 		title2.setForeground(new Color(204, 0, 0));
 		title2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -127,18 +132,11 @@ public class Interface {
 		btnStats.setBounds(238, 261, 314, 61);
 		panelGame.add(btnStats);
 		
-		final JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(238, 171, 61, 16);
-		
-		btnStats.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				cl.show(panelCont, "status");
-				lblNewLabel.setText(zombie.getName());
-				lblNewLabel.setText(String.valueOf(zombie.getBrainHunger()));
-			}
-		});
+		final JLabel lblName = new JLabel();
+		lblName.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblName.setText("Name:");
+		lblName.setForeground(Color.WHITE);
+		lblName.setBounds(238, 80, 61, 16);
 		
 		JButton btnExit2 = new JButton("Beenden");
 		btnExit2.setBounds(238, 344, 314, 61);
@@ -164,6 +162,9 @@ public class Interface {
 				cl.show(panelCont, "start");
 			}
 		});
+		
+		
+		
 		panelCredits.setBackground(new Color(37, 41, 50));
 		panelCredits.setLayout(null);
 		
@@ -171,13 +172,19 @@ public class Interface {
 		btnBackToMenu.setBounds(238, 344, 314, 61);
 		panelCredits.add(btnBackToMenu);
 		
+		btnBackToMenu.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				cl.show(panelCont, "start");
+			}
+		});
+		
 		JLabel title4 = new JLabel ("Zombie RPG");
 		title4.setBounds(184, 53, 420, 82);
 		title4.setForeground(new Color(204, 0, 0));
 		title4.setHorizontalAlignment(SwingConstants.CENTER);
 		title4.setFont(new Font("Arial", Font.BOLD, 70));
-		panelCredits.add(title4);
-		
+		panelCredits.add(title4);	
 		
 		panelStatus.setBackground(new Color(37, 41, 50));
 		panelStatus.setLayout(null);
@@ -187,7 +194,143 @@ public class Interface {
 		panelStatus.add(btnBackToGame);
 		
 		
-		panelStatus.add(lblNewLabel);
+		panelStatus.add(lblName);
+		
+		JLabel lblDecay = new JLabel();
+		lblDecay.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblDecay.setText("Verfall: ");
+		lblDecay.setForeground(Color.WHITE);
+		lblDecay.setBounds(238, 108, 61, 16);
+		panelStatus.add(lblDecay);
+		
+		JLabel lblStrength = new JLabel();
+		lblStrength.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblStrength.setText("Staerke:");
+		lblStrength.setForeground(Color.WHITE);
+		lblStrength.setBounds(238, 136, 68, 16);
+		panelStatus.add(lblStrength);
+		
+		JLabel lblHunger = new JLabel();
+		lblHunger.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblHunger.setText("Hunger: ");
+		lblHunger.setForeground(Color.WHITE);
+		lblHunger.setBounds(238, 164, 68, 16);
+		panelStatus.add(lblHunger);
+		
+		JLabel lblKilled = new JLabel();
+		lblKilled.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblKilled.setText("Menschen getoetet:");
+		lblKilled.setForeground(Color.WHITE);
+		lblKilled.setBounds(238, 192, 158, 16);
+		panelStatus.add(lblKilled);
+		
+		final JLabel lblNameValue = new JLabel();
+		lblNameValue.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNameValue.setForeground(Color.WHITE);
+		lblNameValue.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblNameValue.setBounds(491, 81, 61, 16);
+		panelStatus.add(lblNameValue);
+		
+		final JLabel lblDecayValue = new JLabel();
+		lblDecayValue.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDecayValue.setForeground(Color.WHITE);
+		lblDecayValue.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblDecayValue.setBounds(491, 109, 61, 16);
+		panelStatus.add(lblDecayValue);
+		
+		final JLabel lblStrengthValue = new JLabel();
+		lblStrengthValue.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblStrengthValue.setForeground(Color.WHITE);
+		lblStrengthValue.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblStrengthValue.setBounds(484, 137, 68, 16);
+		panelStatus.add(lblStrengthValue);
+		
+		final JLabel lblHungerValue = new JLabel();
+		lblHungerValue.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblHungerValue.setForeground(Color.WHITE);
+		lblHungerValue.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblHungerValue.setBounds(484, 165, 68, 16);
+		panelStatus.add(lblHungerValue);
+		
+		final JLabel lblKilledValue = new JLabel();
+		lblKilledValue.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblKilledValue.setForeground(Color.WHITE);
+		lblKilledValue.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblKilledValue.setBounds(408, 193, 144, 16);
+		panelStatus.add(lblKilledValue);
+		
+		JLabel lblKilledDouchebags = new JLabel();
+		lblKilledDouchebags.setText("- Dummkoepfe:");
+		lblKilledDouchebags.setForeground(Color.WHITE);
+		lblKilledDouchebags.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblKilledDouchebags.setBounds(238, 220, 144, 16);
+		panelStatus.add(lblKilledDouchebags);
+		
+		JLabel lblKilledCraftsmen = new JLabel();
+		lblKilledCraftsmen.setText("- Handwerker:");
+		lblKilledCraftsmen.setForeground(Color.WHITE);
+		lblKilledCraftsmen.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblKilledCraftsmen.setBounds(238, 248, 144, 16);
+		panelStatus.add(lblKilledCraftsmen);
+		
+		JLabel lblKilledAcademics = new JLabel();
+		lblKilledAcademics.setText("- Akademiker:");
+		lblKilledAcademics.setForeground(Color.WHITE);
+		lblKilledAcademics.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblKilledAcademics.setBounds(238, 276, 144, 16);
+		panelStatus.add(lblKilledAcademics);
+		
+		JLabel lblKilledSoldiers = new JLabel();
+		lblKilledSoldiers.setText("- Soldaten:");
+		lblKilledSoldiers.setForeground(Color.WHITE);
+		lblKilledSoldiers.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblKilledSoldiers.setBounds(238, 304, 144, 16);
+		panelStatus.add(lblKilledSoldiers);
+		
+		final JLabel lblKilledDouchebagsValue = new JLabel();
+		lblKilledDouchebagsValue.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblKilledDouchebagsValue.setForeground(Color.WHITE);
+		lblKilledDouchebagsValue.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblKilledDouchebagsValue.setBounds(408, 221, 144, 16);
+		panelStatus.add(lblKilledDouchebagsValue);
+		
+		final JLabel lblKilledCraftsmenValue = new JLabel();
+		lblKilledCraftsmenValue.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblKilledCraftsmenValue.setForeground(Color.WHITE);
+		lblKilledCraftsmenValue.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblKilledCraftsmenValue.setBounds(408, 249, 144, 16);
+		panelStatus.add(lblKilledCraftsmenValue);
+		
+		final JLabel lblKilledAcademicsValue = new JLabel();
+		lblKilledAcademicsValue.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblKilledAcademicsValue.setForeground(Color.WHITE);
+		lblKilledAcademicsValue.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblKilledAcademicsValue.setBounds(408, 277, 144, 16);
+		panelStatus.add(lblKilledAcademicsValue);
+		
+		final JLabel lblKilledSoldiersValue = new JLabel();
+		lblKilledSoldiersValue.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblKilledSoldiersValue.setForeground(Color.WHITE);
+		lblKilledSoldiersValue.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		lblKilledSoldiersValue.setBounds(408, 305, 144, 16);
+		panelStatus.add(lblKilledSoldiersValue);
+		
+		btnStats.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				cl.show(panelCont, "status");
+				lblNameValue.setText(zombie.getName());
+				lblDecayValue.setText(String.valueOf(zombie.getDecay()));
+				lblStrengthValue.setText(String.valueOf(zombie.getStrength()));
+				lblHungerValue.setText(String.valueOf(zombie.getBrainHunger()));
+				lblKilledValue.setText(String.valueOf(zombie.getHumansKilled()));
+				
+				lblKilledDouchebagsValue.setText((String.valueOf(zombie.killedDouchbags)));
+				lblKilledCraftsmenValue.setText((String.valueOf(zombie.killedCraftsmen)));
+				lblKilledAcademicsValue.setText((String.valueOf(zombie.killedAcademics)));
+				lblKilledSoldiersValue.setText((String.valueOf(zombie.killedSoldiers)));
+			}
+		});
 		
 		btnBackToGame.addActionListener(new ActionListener() {
 			@Override
@@ -195,5 +338,35 @@ public class Interface {
 				cl.show(panelCont, "game");
 			}
 		});
+		
+		panelFight.setBackground(new Color(37, 41, 50));
+		panelFight.setLayout(null);
+		
+		JButton btnNewButton_1 = new JButton("Kratzen");
+		btnNewButton_1.setBounds(45, 300, 117, 53);
+		panelFight.add(btnNewButton_1);
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		
+		JButton btnNewButton_3 = new JButton("Entwaffnen");
+		btnNewButton_3.setBounds(174, 300, 117, 53);
+		panelFight.add(btnNewButton_3);
+		
+		JButton btnBeissen = new JButton("Beissen");
+		btnBeissen.setBounds(45, 365, 117, 53);
+		panelFight.add(btnBeissen);
+		
+		JButton btnAnspringen = new JButton("Anspringen");
+		btnAnspringen.setBounds(174, 365, 117, 53);
+		panelFight.add(btnAnspringen);
+		
+		JButton btnFlchten = new JButton("Fluechten");
+		btnFlchten.setBounds(303, 300, 117, 53);
+		panelFight.add(btnFlchten);
 	}
 }

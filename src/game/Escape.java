@@ -55,7 +55,7 @@ public class Escape {
 			zombie.setBrainHunger(zombie.brainHunger ++);
 			zombie.setDecay(zombie.decay ++);
 			zombie.setStrength(zombie.getStrength() + (2/human.getStrength()));
-			Fight.gamecircle = false;
+			Fight.gameloop = false;
 			//Start.gamestate = "mainmenu";
 		}
 	}
