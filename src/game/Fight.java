@@ -21,7 +21,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Fight {
 	
 	public Human human;
-	
+	public String beginner;
 	public static boolean gameloop;
 
 	/**
@@ -56,11 +56,12 @@ public class Fight {
 		
 		// actual fight
 		Fight.gameloop = true;
-		while (true == Fight.gameloop) {
+		/*while (true == Fight.gameloop) {
 			getCurrentStatus(zombie, this.human);
 			if("zombie" == beginner) {
 				if(true == Fight.gameloop){
-					zombiesAttackChoice(zombie, this.human);
+					zombiesAttackChoice(choice, zombie, this.human);
+					
 					if(true == Fight.gameloop){
 						TimeUnit.SECONDS.sleep(2);
 						humansAttackChoice(zombie, this.human);
@@ -69,12 +70,14 @@ public class Fight {
 			} else {
 				TimeUnit.SECONDS.sleep(2);
 				humansAttackChoice(zombie, this.human);
-				if(true == Fight.gameloop){
-					zombiesAttackChoice(zombie, this.human);
+				/*if(true == Fight.gameloop){
+					zombiesAttackChoice(choice,zombie, human);
 					
 				}
 			}
-		}
+		}*/
+		
+		
 	}
 	
 	public Human getHuman() {
@@ -94,34 +97,21 @@ public class Fight {
 	 * @throws UnsupportedAudioFileException 
 	 * @throws IOException 
 	 */
-	public void zombiesAttackChoice(Zombie zombie, Human human) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
-		// showing provisionally Main Menu
-//		System.out.println("Du greifst an...");
-//		System.out.println("[1] Kratzen       ");
-//		System.out.println("[2] Beißen        ");
-//		System.out.println("[3] Anspringen    ");
-//		if(human.hasItem){
-//			System.out.println("[4] Entwaffnen    ");
-//		}
-//		System.out.println("[9] Fluchversuch  ");
-//		Scanner input = new Scanner(System.in);
-//		int choice = 0;
+	public void zombiesAttackChoice(int choice,Zombie zombie, Human human) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		
 		// switch case for menu choices
-//		if (1 == choice) {
-//			
-//		} else if (2 == choice){
-//			
-//		} else if (3 == choice) {
-//			
-//		} else if (4 == choice) {
-//			
-//		} else if (9 == choice) {
-//			
-//		} else {
-//			System.out.println("Netter Versuch... G A M E  O V E R. Du bist verrottet.");
-//			System.exit(0);
-//		}
+		if (1 == choice) {
+			attack(human, zombie, 11);
+		} else if (2 == choice){
+			attack(human, zombie, 12);
+		} else if (3 == choice) {
+			attack(human, zombie, 13);
+		} else if (4 == choice) {
+			attack(human, zombie, 14);
+		} else {
+			System.out.println("Netter Versuch... G A M E  O V E R. Du bist verrottet.");
+			System.exit(0);
+		}
 	}
 	
 	/**

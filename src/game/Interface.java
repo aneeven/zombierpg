@@ -148,7 +148,6 @@ public class Interface {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				gameloop = true;
-
 				// switch to game panel content
 				cl.show(panelCont, "game");
 				// instantiate the players' character with given name
@@ -206,7 +205,6 @@ public class Interface {
 			public void actionPerformed(ActionEvent arg0) {
 				Sound noHuman = null;
 				if( new Random().nextDouble() <= 0.7 ){
-					cl.show(panelCont, "fight");
 					// play sound when fight starts
 					try {
 						Sound foundHuman = new Sound("audio/foundHuman.wav");
@@ -215,6 +213,7 @@ public class Interface {
 						e1.printStackTrace();
 					}
     				try {
+    					cl.show(panelCont, "fight");
     					// start the fight, player beginning
 						fight = new Fight(zombie, "zombie");
 						human = fight.getHuman();
@@ -489,6 +488,9 @@ public class Interface {
 		panelFight.setBackground(new Color(37, 41, 50));
 		panelFight.setLayout(null);
 		
+		appendImageToPanel("img/zombieOpenHead.png", panelFight, 50, 100, 20, 20);
+		appendImageToPanel("img/humanFinal.png", panelFight, 50, 100, 200, 20);
+		
 		JButton btnKratzen = new JButton("Kratzen");
 		btnKratzen.setBounds(45, 300, 117, 53);
 		panelFight.add(btnKratzen);
@@ -497,34 +499,34 @@ public class Interface {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					fight.attack(human, zombie, 11);
+					fight.zombiesAttackChoice(1, zombie, human);
 				} catch (IOException | UnsupportedAudioFileException
 						| LineUnavailableException | InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}	
 			}
 		});
 		
+		/**
+		 * @toDo if human hasItem.... check functionality
+		 */
 		JButton btnEntwaffnen = new JButton("Entwaffnen");
 		btnEntwaffnen.setBounds(174, 300, 117, 53);
 		panelFight.add(btnEntwaffnen);
-//		if(human.hasItem) {
-//			attack(human, zombie, 12);
-//		} else {
-//			System.out.println("Du bist gestolpert...");
-//			zombie.setDecay(zombie.getDecay() + 5.0);
-//		}
 		
 		btnEntwaffnen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					fight.attack(human, zombie, 11);
-				} catch (IOException | UnsupportedAudioFileException
-						| LineUnavailableException | InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if(true == human.hasItem) {
+					try {
+						fight.zombiesAttackChoice(2, zombie, human);
+					} catch (IOException | UnsupportedAudioFileException
+							| LineUnavailableException | InterruptedException e) {
+						e.printStackTrace();
+					}
+				} else {
+				System.out.println("Du bist gestolpert...");
+				zombie.setDecay(zombie.getDecay() + 5.0);
 				}
 			}
 		});
@@ -537,10 +539,9 @@ public class Interface {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					fight.attack(human, zombie, 13);
+					fight.zombiesAttackChoice(3, zombie, human);
 				} catch (IOException | UnsupportedAudioFileException
 						| LineUnavailableException | InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -554,10 +555,9 @@ public class Interface {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					fight.attack(human, zombie, 14);
+					fight.zombiesAttackChoice(4, zombie, human);
 				} catch (IOException | UnsupportedAudioFileException
 						| LineUnavailableException | InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -566,7 +566,6 @@ public class Interface {
 		JButton btnFlchten = new JButton("Flüchten");
 		btnFlchten.setBounds(303, 300, 117, 53);
 		panelFight.add(btnFlchten);
-		
 		btnFlchten.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -574,7 +573,6 @@ public class Interface {
 					Escape escape = new Escape(zombie, human);
 				} catch (IOException | UnsupportedAudioFileException
 						| LineUnavailableException | InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
