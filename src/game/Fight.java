@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.JPanel;
 
 /**
  * class Fight
@@ -112,6 +113,7 @@ public class Fight {
 			System.out.println("Netter Versuch... G A M E  O V E R. Du bist verrottet.");
 			System.exit(0);
 		}
+		
 	}
 	
 	/**
@@ -173,24 +175,32 @@ public class Fight {
 					human.setLives(human.getLives() - (1*zombie.strength));
 					Sound zombieSound = new Sound("audio/zombieAttack.wav");
 					System.out.println("Kratzen erfolgreich");
+					humansAttackChoice(zombie, this.human);
+					getCurrentStatus(zombie, this.human);
 					break;
 				} else {
 					zombie.setDecay(zombie.getDecay() + 1);
 					System.out.println("Kratzen abgewehrt");
+					humansAttackChoice(zombie, this.human);
+					getCurrentStatus(zombie, this.human);
 					break;
 				}
 			case(12):
 				// disarm successful with probability 50%
-				if( new Random().nextDouble() <= 0.5 ){
+				if( new Random().nextDouble() <= 0.5 && human.hasItem == true){
 					human.setHasItem(false);
 					human.setItemName("nichts");
 					human.setItemStrength(0);
 					Sound zombieSound = new Sound("audio/zombieAttack.wav");
 					System.out.println("Entwaffnung erfolgreich");
+					humansAttackChoice(zombie, this.human);
+					getCurrentStatus(zombie, this.human);
 					break;
 				} else {
 					zombie.setDecay(zombie.getDecay() + 3);
 					System.out.println("Entwaffnung nicht geglückt");
+					humansAttackChoice(zombie, this.human);
+					getCurrentStatus(zombie, this.human);
 					break;
 				}
 			case(13):
@@ -200,10 +210,14 @@ public class Fight {
 					zombie.setBrainHunger(zombie.getBrainHunger() - (0.25 * human.getBrainStrength()));
 					Sound zombieSound = new Sound("audio/zombieAttack.wav");
 					System.out.println("Beißen erfolgreich");
+					humansAttackChoice(zombie, this.human);
+					getCurrentStatus(zombie, this.human);
 					break;
 				} else {
 					zombie.setDecay(zombie.getDecay() + 1);
 					System.out.println("Biss abgewehrt");
+					humansAttackChoice(zombie, this.human);
+					getCurrentStatus(zombie, this.human);
 					break;
 				}
 			case(14):
@@ -212,10 +226,14 @@ public class Fight {
 					zombie.setStrength(zombie.getStrength() + (human.strength));
 					Sound zombieSound = new Sound("audio/zombieAttack.wav");
 					System.out.println("Anspringen geglückt");
+					humansAttackChoice(zombie, this.human);
+					getCurrentStatus(zombie, this.human);
 					break;
 				} else {
 					zombie.setDecay(zombie.getDecay() + 5);
 					System.out.println("Anspringen abgewehrt");
+					humansAttackChoice(zombie, this.human);
+					getCurrentStatus(zombie, this.human);
 					break;
 				}
 			case(21):
@@ -260,7 +278,7 @@ public class Fight {
 			default:
 				System.out.println("Ihr starrt euch an...");
 				break;
-		}		
+		}
 	}
 	
 	/**
@@ -319,9 +337,9 @@ public class Fight {
 			System.out.println("      [1] zurück zum Hauptmenü        ");
 			System.out.println("######################################");
 			System.out.println();
-			Scanner input = new Scanner(System.in);
+//			Scanner input = new Scanner(System.in);
 			Fight.gameloop = false;
-			int choice = input.nextInt();
+//			int choice = input.nextInt();
 			/*switch(choice){
 			case(1):Start.gamestate = "startmenu";
 					break;

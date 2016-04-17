@@ -26,7 +26,7 @@ public class Interface {
 	JPanel panelFight = new JPanel();
 	JPanel panelCredits = new JPanel();
 	JPanel panelStatus = new JPanel();
-	CardLayout cl = new CardLayout();
+	public CardLayout cl = new CardLayout();
 	private JTextField inputName;
 	Zombie zombie;
 	public Human human;
@@ -517,17 +517,12 @@ public class Interface {
 		btnEntwaffnen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(true == human.hasItem) {
 					try {
 						fight.zombiesAttackChoice(2, zombie, human);
 					} catch (IOException | UnsupportedAudioFileException
 							| LineUnavailableException | InterruptedException e) {
 						e.printStackTrace();
 					}
-				} else {
-				System.out.println("Du bist gestolpert...");
-				zombie.setDecay(zombie.getDecay() + 5.0);
-				}
 			}
 		});
 		
