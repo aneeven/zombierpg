@@ -29,7 +29,10 @@ public class Interface {
 	CardLayout cl = new CardLayout();
 	private JTextField inputName;
 	Zombie zombie;
+	public Human human;
 	Sound backgroundMusic;
+	boolean gameloop = false;
+	public Fight fight;
 
 	/**
 	 * Interface constructor
@@ -67,7 +70,6 @@ public class Interface {
 			this.backgroundMusic = new Sound("audio/title.wav");
 		} catch (IOException | UnsupportedAudioFileException
 				| LineUnavailableException | InterruptedException e3) {
-			// TODO Auto-generated catch block
 			e3.printStackTrace();
 		}
 		
@@ -115,7 +117,7 @@ public class Interface {
 		});
 		
 		// #################################################
-		// NAME INPUT
+		// NAME INPUT - instantiation of players' zombie object
 		// #################################################
 		
 		// Main label for game title
@@ -145,12 +147,12 @@ public class Interface {
 		btnStartGame.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				gameloop = true;
+
 				// switch to game panel content
 				cl.show(panelCont, "game");
 				// instantiate the players' character with given name
 				zombie = new Zombie(inputName.getText());
-				// instantiate Gamestart
-				Gamestart Game = new Gamestart();
 				// change background music to game music
 				try {
 					backgroundMusic.stopClip();
@@ -159,13 +161,6 @@ public class Interface {
 						| LineUnavailableException | InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				try {
-					Game.start(zombie);
-				} catch (IOException | UnsupportedAudioFileException
-						| LineUnavailableException | InterruptedException e) {
-					e.printStackTrace();
-				}
-				
 			}
 		});
 		
@@ -221,7 +216,8 @@ public class Interface {
 					}
     				try {
     					// start the fight, player beginning
-						Fight fight = new Fight(zombie, "zombie");
+						fight = new Fight(zombie, "zombie");
+						human = fight.getHuman();
 					} catch (IOException | UnsupportedAudioFileException
 							| LineUnavailableException | InterruptedException e) {
 						e.printStackTrace();
@@ -500,7 +496,13 @@ public class Interface {
 		btnKratzen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				attack(human, zombie, 11);
+				try {
+					fight.attack(human, zombie, 11);
+				} catch (IOException | UnsupportedAudioFileException
+						| LineUnavailableException | InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
 			}
 		});
 		
@@ -517,7 +519,13 @@ public class Interface {
 		btnEntwaffnen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				attack(human, zombie, 11);
+				try {
+					fight.attack(human, zombie, 11);
+				} catch (IOException | UnsupportedAudioFileException
+						| LineUnavailableException | InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -528,7 +536,13 @@ public class Interface {
 		btnBeissen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				attack(human, zombie, 13);
+				try {
+					fight.attack(human, zombie, 13);
+				} catch (IOException | UnsupportedAudioFileException
+						| LineUnavailableException | InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -539,7 +553,13 @@ public class Interface {
 		btnAnspringen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				attack(human, zombie, 14);
+				try {
+					fight.attack(human, zombie, 14);
+				} catch (IOException | UnsupportedAudioFileException
+						| LineUnavailableException | InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -550,7 +570,13 @@ public class Interface {
 		btnFlchten.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Escape escape = new Escape(zombie, human);
+				try {
+					Escape escape = new Escape(zombie, human);
+				} catch (IOException | UnsupportedAudioFileException
+						| LineUnavailableException | InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 	}

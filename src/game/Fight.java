@@ -20,6 +20,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Fight {
 	
+	public Human human;
+	
 	public static boolean gameloop;
 
 	/**
@@ -40,7 +42,7 @@ public class Fight {
 	 */
 	public Fight(Zombie zombie, String beginner) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		
-		Human human = new Human();
+		this.human = new Human();
 		
 		/*
 		 * @toDo : create a nextRoundBonus mechanism
@@ -48,31 +50,35 @@ public class Fight {
 		// current state before fight
 		int zombieNextAttackBonus = 0;
 		int currentZombieStrength = zombie.strength + zombieNextAttackBonus;
-		int currentHumanStrength = human.strength + human.itemStrength;
+		int currentHumanStrength = this.human.strength + this.human.itemStrength;
 		double currentZombieDecay = zombie.decay;
-		int currentHumanLives = human.lives;
+		int currentHumanLives = this.human.lives;
 		
 		// actual fight
 		Fight.gameloop = true;
 		while (true == Fight.gameloop) {
-			getCurrentStatus(zombie, human);
+			getCurrentStatus(zombie, this.human);
 			if("zombie" == beginner) {
 				if(true == Fight.gameloop){
-					zombiesAttackChoice(zombie, human);
+					zombiesAttackChoice(zombie, this.human);
 					if(true == Fight.gameloop){
 						TimeUnit.SECONDS.sleep(2);
-						humansAttackChoice(zombie, human);
+						humansAttackChoice(zombie, this.human);
 					}
 				}
 			} else {
 				TimeUnit.SECONDS.sleep(2);
-				humansAttackChoice(zombie, human);
+				humansAttackChoice(zombie, this.human);
 				if(true == Fight.gameloop){
-					zombiesAttackChoice(zombie, human);
+					zombiesAttackChoice(zombie, this.human);
 					
 				}
 			}
 		}
+	}
+	
+	public Human getHuman() {
+		return this.human;
 	}
 	
 	/**
