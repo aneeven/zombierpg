@@ -175,7 +175,7 @@ public class Fight {
 				// scratch successful with probability 90%
 				if( new Random().nextDouble() <= 0.9 ){
 					human.setLives(human.getLives() - (1*zombie.strength));
-					Sound zombieSound = new Sound("src/audio/zombieAttack.wav");
+					Sound zombieSound = new Sound("audio/zombieAttack.wav");
 					System.out.println("Kratzen erfolgreich");
 					break;
 				} else {
@@ -189,7 +189,7 @@ public class Fight {
 					human.setHasItem(false);
 					human.setItemName("nichts");
 					human.setItemStrength(0);
-					Sound zombieSound = new Sound("src/audio/zombieAttack.wav");
+					Sound zombieSound = new Sound("audio/zombieAttack.wav");
 					System.out.println("Entwaffnung erfolgreich");
 					break;
 				} else {
@@ -202,7 +202,7 @@ public class Fight {
 				if( new Random().nextDouble() <= 0.7 ){
 					human.setLives(human.getLives() - (2*zombie.strength));
 					zombie.setBrainHunger(zombie.getBrainHunger() - (0.25 * human.getBrainStrength()));
-					Sound zombieSound = new Sound("src/audio/zombieAttack.wav");
+					Sound zombieSound = new Sound("audio/zombieAttack.wav");
 					System.out.println("Beißen erfolgreich");
 					break;
 				} else {
@@ -214,7 +214,7 @@ public class Fight {
 				// pounce on successful with probability 40%
 				if( new Random().nextDouble() <= 0.4 ){
 					zombie.setStrength(zombie.getStrength() + (human.strength));
-					Sound zombieSound = new Sound("src/audio/zombieAttack.wav");
+					Sound zombieSound = new Sound("audio/zombieAttack.wav");
 					System.out.println("Anspringen geglückt");
 					break;
 				} else {
@@ -227,7 +227,7 @@ public class Fight {
 					// useItem successful with probability 40%
 					if( new Random().nextDouble() <= 0.4 ){
 						zombie.decay = zombie.getDecay() + (3*(human.strength));
-						Sound punchSound = new Sound("src/audio/punch.wav");
+						Sound punchSound = new Sound("audio/punch.wav");
 						System.out.println("Du wurdest von einem Gegenstand getroffen");
 						break;
 					} else {
@@ -243,7 +243,7 @@ public class Fight {
 				// punch successful with probability 80%
 				if( new Random().nextDouble() <= 0.8 ){
 					zombie.decay = zombie.getDecay() + (human.strength);
-					Sound punchSound = new Sound("src/audio/punch.wav");
+					Sound punchSound = new Sound("audio/punch.wav");
 					System.out.println("Du wurdest geschlagen");
 					break;
 				} else {
@@ -254,7 +254,7 @@ public class Fight {
 				// kick successful with probability 60% 
 				if( new Random().nextDouble() <= 0.6 ){
 					zombie.decay = zombie.getDecay() + (2*(human.strength));
-					Sound punchSound = new Sound("src/audio/punch.wav");
+					Sound punchSound = new Sound("audio/punch.wav");
 					System.out.println("Du wurdest getreten");
 					break;
 				} else {
@@ -302,7 +302,7 @@ public class Fight {
 			} else if ("soldier" == human.type) {
 				zombie.killedSoldiers ++;
 			}
-			Sound victorySound = new Sound("src/audio/victory.wav");
+			Sound victorySound = new Sound("audio/victory.wav");
 			Fight.gameloop = false;
 			// going back to main menu if fight is over
 			//Start.gamestate = "mainmenu";
@@ -310,7 +310,7 @@ public class Fight {
 			/**
 			 * @toDo: add mechanic for hunger increasing/decreasing decay and v.v
 			 */
-			Sound defeatSound = new Sound("src/audio/defeat.wav");
+			Sound defeatSound = new Sound("audio/defeat.wav");
 			System.out.println();
 			System.out.println("######################################");
 			System.out.println("         N I E D E R L A G E          ");
