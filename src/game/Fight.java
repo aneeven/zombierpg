@@ -90,37 +90,32 @@ public class Fight {
 	 */
 	public void zombiesAttackChoice(Zombie zombie, Human human) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		// showing provisionally Main Menu
-		System.out.println("Du greifst an...");
-		System.out.println("[1] Kratzen       ");
-		System.out.println("[2] Beißen        ");
-		System.out.println("[3] Anspringen    ");
-		if(human.hasItem){
-			System.out.println("[4] Entwaffnen    ");
-		}
-		System.out.println("[9] Fluchversuch  ");
-		Scanner input = new Scanner(System.in);
-		int choice = input.nextInt();
+//		System.out.println("Du greifst an...");
+//		System.out.println("[1] Kratzen       ");
+//		System.out.println("[2] Beißen        ");
+//		System.out.println("[3] Anspringen    ");
+//		if(human.hasItem){
+//			System.out.println("[4] Entwaffnen    ");
+//		}
+//		System.out.println("[9] Fluchversuch  ");
+//		Scanner input = new Scanner(System.in);
+//		int choice = 0;
 		
 		// switch case for menu choices
-		if (1 == choice) {
-			attack(human, zombie, 11);
-		} else if (2 == choice){
-			attack(human, zombie, 13);
-		} else if (3 == choice) {
-			attack(human, zombie, 14);
-		} else if (4 == choice) {
-			if(human.hasItem) {
-				attack(human, zombie, 12);
-			} else {
-				System.out.println("Du bist gestolpert...");
-				zombie.setDecay(zombie.getDecay() + 5.0);
-			}
-		} else if (9 == choice) {
-			Escape escape = new Escape(zombie, human);
-		} else {
-			System.out.println("Netter Versuch... G A M E  O V E R. Du bist verrottet.");
-			System.exit(0);
-		}
+//		if (1 == choice) {
+//			
+//		} else if (2 == choice){
+//			
+//		} else if (3 == choice) {
+//			
+//		} else if (4 == choice) {
+//			
+//		} else if (9 == choice) {
+//			
+//		} else {
+//			System.out.println("Netter Versuch... G A M E  O V E R. Du bist verrottet.");
+//			System.exit(0);
+//		}
 	}
 	
 	/**
@@ -308,7 +303,7 @@ public class Fight {
 				zombie.killedSoldiers ++;
 			}
 			Sound victorySound = new Sound("src/audio/victory.wav");
-			Fight.gamecircle = false;
+			Fight.gameloop = false;
 			// going back to main menu if fight is over
 			//Start.gamestate = "mainmenu";
 		} else if(zombie.decay>=100) {

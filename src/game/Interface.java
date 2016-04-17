@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Random;
 
 public class Interface {
 	JFrame frame = new JFrame("Zombie RPG");
@@ -108,8 +109,6 @@ public class Interface {
 			public void actionPerformed(ActionEvent arg0) {
 				cl.show(panelCont, "game");
 				
-				// Set userName to input content
-				// zombie.setName() = inputName.getText();
 				zombie = new Zombie(inputName.getText());
 				Gamestart Game = new Gamestart();
 				try {
@@ -159,7 +158,23 @@ public class Interface {
 		btnSearch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				cl.show(panelCont, "start");
+				if( new Random().nextDouble() <= 0.7 ){
+					cl.show(panelCont, "fight");
+//    				Sound foundHuman = new Sound("src/audio/foundHuman.wav");
+    				try {
+    					
+						Fight fight = new Fight(zombie, "zombie");
+					} catch (IOException | UnsupportedAudioFileException
+							| LineUnavailableException | InterruptedException e) {
+						e.printStackTrace();
+					}
+    			} else {
+//    				Sound noHuman = new Sound("src/audio/noHuman.wav");
+//    				noHuman.playClip();
+    				zombie.setBrainHunger(zombie.getBrainHunger() + 1.0);
+    				zombie.setDecay(zombie.getDecay() + 2.0);
+//    				noHuman.stopClip();
+    			}
 			}
 		});
 		
@@ -342,31 +357,65 @@ public class Interface {
 		panelFight.setBackground(new Color(37, 41, 50));
 		panelFight.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("Kratzen");
-		btnNewButton_1.setBounds(45, 300, 117, 53);
-		panelFight.add(btnNewButton_1);
+		JButton btnKratzen = new JButton("Kratzen");
+		btnKratzen.setBounds(45, 300, 117, 53);
+		panelFight.add(btnKratzen);
 		
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnKratzen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				attack(human, zombie, 11);
 			}
 		});
 		
-		JButton btnNewButton_3 = new JButton("Entwaffnen");
-		btnNewButton_3.setBounds(174, 300, 117, 53);
-		panelFight.add(btnNewButton_3);
+		JButton btnEntwaffnen = new JButton("Entwaffnen");
+		btnEntwaffnen.setBounds(174, 300, 117, 53);
+		panelFight.add(btnEntwaffnen);
+//		if(human.hasItem) {
+//			attack(human, zombie, 12);
+//		} else {
+//			System.out.println("Du bist gestolpert...");
+//			zombie.setDecay(zombie.getDecay() + 5.0);
+//		}
+		
+		btnEntwaffnen.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				attack(human, zombie, 11);
+			}
+		});
 		
 		JButton btnBeissen = new JButton("Beissen");
 		btnBeissen.setBounds(45, 365, 117, 53);
 		panelFight.add(btnBeissen);
 		
+		btnBeissen.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				attack(human, zombie, 13);
+			}
+		});
+		
 		JButton btnAnspringen = new JButton("Anspringen");
 		btnAnspringen.setBounds(174, 365, 117, 53);
 		panelFight.add(btnAnspringen);
 		
+		btnAnspringen.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				attack(human, zombie, 14);
+			}
+		});
+		
 		JButton btnFlchten = new JButton("Fluechten");
 		btnFlchten.setBounds(303, 300, 117, 53);
 		panelFight.add(btnFlchten);
+		
+		btnFlchten.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Escape escape = new Escape(zombie, human);
+			}
+		});
 	}
 }
